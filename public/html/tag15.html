@@ -1,0 +1,41 @@
+<!-- Tag 15 -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tag 15 - Datum und Zeit</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Tag 15: Datum und Zeit – Gib das aktuelle Datum und die Uhrzeit aus</h1>
+        </header>
+        
+        <section class="content">
+            <p>Heute lernst du, wie du das aktuelle Datum und die Uhrzeit mit Python anzeigen kannst. Das ist wichtig, wenn du Programme mit Zeitsteuerung, Protokollierung oder Datumsberechnungen erstellen möchtest.</p>
+
+            <h2>Programm: Datum und Uhrzeit ausgeben</h2>
+            <pre>
+from datetime import datetime
+
+jetzt = datetime.now()
+print("Das aktuelle Datum und die Uhrzeit sind:", jetzt.strftime("%Y-%m-%d %H:%M:%S"))
+            </pre>
+
+            <h3>Erklärung:</h3>
+            <ol>
+                <li><strong>Modul:</strong> Das Modul <code>datetime</code> bietet viele Funktionen, um mit Datums- und Zeitangaben zu arbeiten, z. B. das aktuelle Datum abrufen, Zeitdifferenzen berechnen oder Daten formatieren.</li>
+                <li><strong>Formatierung:</strong> Mit der Methode <code>strftime()</code> kannst du die Ausgabe in verschiedenen Formaten anpassen, z. B. nur das Datum oder nur die Zeit.</li>
+                <li><strong>Praxis:</strong> Solche Programme werden in Kalender-Apps, Erinnerungsfunktionen oder Protokollierungs-Tools genutzt.</li>
+            </ol>
+
+            <h3>Challenge des Tages:</h3>
+            <p>Erstelle ein Programm, das die aktuelle Uhrzeit im 12-Stunden-Format anzeigt und dem Benutzer sagt, ob es Morgen, Nachmittag oder Abend ist.</p>
+        </section>
+
+
+    </div>
+</body>
+</html>

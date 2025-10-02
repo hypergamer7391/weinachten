@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tag 10 - Funktionen in Python</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Tag 10: Funktionen in Python</h1>
+        </header>
+        
+        <section class="content">
+            <p>Heute lernst du, wie man Funktionen in Python erstellt und verwendet. Funktionen sind sehr nützlich, um wiederverwendbaren Code zu schreiben.</p>
+
+            <h2>Was sind Funktionen?</h2>
+            <p>Funktionen ermöglichen es dir, einen Codeblock zu erstellen, den du immer wieder aufrufen kannst. Du definierst eine Funktion mit dem Schlüsselwort `def` und kannst ihr beliebig viele Eingabewerte (Parameter) übergeben. Hier ist ein einfaches Beispiel:</p>
+            <pre>
+def begruessung(name):
+    print("Hallo, " + name + "!")
+            </pre>
+            <p>In diesem Beispiel haben wir eine Funktion `begruessung()`, die einen Namen entgegennimmt und eine Begrüßung ausgibt.</p>
+
+            <h2>Funktion aufrufen</h2>
+            <p>Um die Funktion zu verwenden, rufst du sie mit einem Wert für den Parameter auf. Zum Beispiel:</p>
+            <pre>
+begruessung("Max")
+            </pre>
+            <p>Dies gibt die Nachricht "Hallo, Max!" aus.</p>
+
+            <h2>Schritt 1: Deine eigene Funktion erstellen</h2>
+            <p>Öffne die Entwicklungsumgebung und schreibe folgenden Code:</p>
+            <pre>
+def addiere(x, y):
+    return x + y
+
+ergebnis = addiere(5, 3)
+print(ergebnis)
+            </pre>
+            <p>In diesem Beispiel haben wir eine Funktion `addiere()`, die zwei Zahlen addiert und das Ergebnis zurückgibt. Wir rufen die Funktion mit den Werten 5 und 3 auf und speichern das Ergebnis in der Variablen `ergebnis`.</p>
+
+            <h2>Schritt 2: Funktion ausführen</h2>
+            <p>Führ die Datei aus, um das Ergebnis der Addition zu sehen.</p>
+
+            <h3>Challenge des Tages:</h3>
+            <p>Ändere die Funktion `addiere()` so, dass sie auch mit drei Zahlen arbeitet, anstatt nur zwei. Teste die Funktion, indem du verschiedene Zahlen übergibst. Probier auch die Funktion mehrmals im Code, mit verschiedene Zahlen, aufzurufen.</p>
+            
+            <h3>Zusatzchallenge:</h3>
+            <p>Erstell zwei Variablen welche durch eine Eingabe definiert werden (zahl1=int(input("zahl1: "))) übergeb der Funktion nun keine Zahlen sondern die Variablen. Es sollen also die beiden Zahlen die addiert werden NICHT im Code sondern durch zwei Eingaben festgelegt werden. </p>
+        </section>
+
+
+    </div>
+</body>
+</html>

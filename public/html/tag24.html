@@ -1,0 +1,52 @@
+<!-- Tag 24 -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tag 24 - Mini-Adventskalender</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Tag 24: Projekt – Mini-Adventskalender</h1>
+        </header>
+        
+        <section class="content">
+            <p>Zum Abschluss erstellst du ein Programm, das für jeden Tag im Dezember bis Weihnachten eine Nachricht anzeigt.</p>
+
+            <h2>Programm: Adventskalender</h2>
+            <pre>
+from datetime import datetime
+
+nachrichten = {
+    1: "Starte in die Weihnachtszeit!",
+    2: "Zeit, Kekse zu backen!",
+    # Füge für jeden Tag eine Nachricht hinzu
+    24: "Frohe Weihnachten!"
+}
+
+heute = datetime.now().day
+
+if heute in nachrichten:
+    print(nachrichten[heute])
+else:
+    print("Noch keine Nachricht für heute.")
+            </pre>
+
+            <h3>Erklärung:</h3>
+            <ol>
+                <li><strong>Dictionary:</strong> Die Nachrichten für jeden Tag werden in einem Dictionary gespeichert.</li>
+                <li><strong>Aktuelles Datum:</strong> Mit <code>datetime.now()</code> wird das aktuelle Datum abgerufen.</li>
+            </ol>
+
+            <h3>Challenge des Tages:</h3>
+            <p>Erweitere den Adventskalender so, dass es für jeden tag ein Türchen gibt du kannst auch versuchen ihn interaktiv zu gestalten indem du fragst welches der Türchen geöffnet werden soll.</p>
+            <p>Danke fürs nutzen des Adventskalenders wenn du möchtest kannst du unten gerne noch dein Feedback abgeben</p>
+        </section>
+
+
+    </div>
+</body>
+</html>

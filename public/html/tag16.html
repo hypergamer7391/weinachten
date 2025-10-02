@@ -1,0 +1,46 @@
+<!-- Tag 16 -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tag 16 - Klassen: Erstelle eine Klasse Weihnachtsbaum</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Tag 16: Klassen – Erstelle eine Klasse Weihnachtsbaum mit einem Attribut Höhe</h1>
+        </header>
+        
+        <section class="content">
+            <p>Heute lernst du, wie du mit Python Klassen erstellst. Klassen sind ein zentraler Bestandteil der objektorientierten Programmierung und helfen, Strukturen zu organisieren.</p>
+
+            <h2>Programm: Klasse Weihnachtsbaum</h2>
+            <pre>
+class Weihnachtsbaum:
+    def __init__(self, hoehe):
+        self.hoehe = hoehe
+
+    def anzeigen(self):
+        print(f"Dieser Weihnachtsbaum ist {self.hoehe} Meter hoch.")
+
+baum = Weihnachtsbaum(3)
+baum.anzeigen()
+            </pre>
+
+            <h3>Erklärung:</h3>
+            <ol>
+                <li><strong>Klasse:</strong> Eine Klasse ist eine Vorlage für Objekte, die Attribute und Methoden enthalten kann.</li>
+                <li><strong>Init-Methode:</strong> Die Methode <code>__init__</code> wird aufgerufen, wenn ein Objekt erstellt wird. Sie dient zur Initialisierung von Attributen.</li>
+                <li><strong>Methode:</strong> Die Methode <code>anzeigen</code> gibt die Höhe des Weihnachtsbaums aus.</li>
+            </ol>
+
+            <h3>Challenge des Tages:</h3>
+            <p>Erweitere die Klasse so, dass sie auch eine Farbe enthält. Füge eine Methode hinzu, die die Höhe und Farbe des Weihnachtsbaums anzeigt.</p>
+        </section>
+        
+
+    </div>
+</body>
+</html>

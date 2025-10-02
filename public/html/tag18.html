@@ -1,0 +1,69 @@
+<!-- Tag 18 -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tag 18 - Projekt: Geschenke und Empfänger speichern</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Tag 18: Projekt – Geschenke und Empfänger speichern</h1>
+        </header>
+        
+        <section class="content">
+            <p>Heute kombinierst du deine bisherigen Kenntnisse, um ein Programm zu erstellen, das Geschenke zusammen mit ihren Empfängern speichert.</p>
+
+            <h2>Programm: Geschenke und Empfänger</h2>
+            <pre>
+geschenke = {}
+
+while True:
+    empfaenger = input("Gib den Namen des Empfängers ein (oder 'exit' zum Beenden): ")
+    if empfaenger.lower() == 'exit':
+        break
+    geschenk = input(f"Welches Geschenk möchtest du für {empfaenger} speichern? ")
+    geschenke[empfaenger] = geschenk
+
+print("\nGeschenke-Liste:")
+for empfaenger, geschenk in geschenke.items():
+    print(f"- {empfaenger}: {geschenk}")
+            </pre>
+
+            <h3>Erklärung:</h3>
+            <ol>
+                <li><strong>Wörterbuch:</strong> Wir verwenden ein <code>dict</code>, um die Zuordnung zwischen Empfängern und Geschenken zu speichern.</li>
+                <li><strong>Eingabe:</strong> Der Benutzer wird aufgefordert, den Empfänger und das Geschenk einzugeben.</li>
+                <li><strong>Ausgabe:</strong> Am Ende wird die Liste der Empfänger und ihrer Geschenke angezeigt.</li>
+            </ol>
+
+            <h3>Challenge des Tages:</h3>
+            <p>Erweitere das Programm so, dass es überprüft, ob ein Empfänger bereits existiert, und fragt, ob das Geschenk überschrieben werden soll.</p>
+        </section>
+        <!-- beispiel: geschenke = {}
+
+while True:
+    empfaenger = input("Gib den Namen des Empfängers ein (oder 'exit' zum Beenden): ")
+    if empfaenger.lower() == 'exit':
+        break
+    if empfaenger in geschenke:
+        ueber = input("Der Empfänger existiert bereits! Willst du sein Geschenk überschreiben?(y/n)")
+        if ueber == "y": 
+            geschenk = input(f"Welches Geschenk möchtest du für {empfaenger} speichern? ")
+            geschenke[empfaenger] = geschenk
+        
+            
+    else:
+        geschenk = input(f"Welches Geschenk möchtest du für {empfaenger} speichern? ")
+        geschenke[empfaenger] = geschenk
+
+print("\nGeschenke-Liste:")
+for empfaenger, geschenk in geschenke.items():
+    print(f"- {empfaenger}: {geschenk}")
+             -->
+
+    </div>
+</body>
+</html>

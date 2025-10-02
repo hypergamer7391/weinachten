@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tag 8 - Listen bearbeiten</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Tag 8: Listen bearbeiten</h1>
+        </header>
+        
+        <section class="content">
+            <p>Heute beschäftigen wir uns mit Listen. Listen sind eine der wichtigsten Datenstrukturen in Python und helfen dir, mehrere Werte in einer geordneten Reihenfolge zu speichern.</p>
+
+            <h2>Ein neues Element zur Liste hinzufügen und sortieren</h2>
+            <p>Im folgenden Beispiel fügen wir ein neues Element zur Liste hinzu und sortieren die Liste anschließend alphabetisch:</p>
+            <pre>
+essen = ["Pizza", "Burger", "Pasta"]
+print("Aktuelle Liste:", essen)
+
+neues_essen = input("Füge ein neues Essen hinzu: ")
+essen.append(neues_essen)
+
+# Die Liste sortieren
+essen.sort()
+
+print("Sortierte Liste:", essen)
+            </pre>
+
+            <h3>Erklärung: Wie funktioniert die Sortierung?</h3>
+            <ol>
+                <li><strong>Erstelle eine Liste:</strong> Die Liste <code>essen</code> enthält die Gerichte, z. B. <code>["Pizza", "Burger", "Pasta"]</code>.</li>
+                <li><strong>Neues Element hinzufügen:</strong> Mit der Methode <code>append()</code> fügst du ein neues Gericht (vom Benutzer eingegeben) zur Liste hinzu.</li>
+                <li><strong>Die Liste sortieren:</strong> Die Methode <code>sort()</code> sortiert die Liste alphabetisch (z. B. von "A" bis "Z").</li>
+                <li><strong>Ausgabe der sortierten Liste:</strong> Nach der Sortierung wird die aktualisierte Liste ausgegeben.</li>
+            </ol>
+
+            <h3>Zusätzliche Hinweise</h3>
+            <ul>
+                <li><code>sort()</code> verändert die ursprüngliche Liste.</li>
+                <li>Falls du die Liste in umgekehrter Reihenfolge sortieren möchtest, kannst du <code>sort(reverse=True)</code> verwenden.</li>
+                <li>Falls du die ursprüngliche Liste unverändert lassen willst, kannst du stattdessen die Funktion <code>sorted()</code> verwenden.</li>
+            </ul>
+
+            <h3>Challenge des Tages:</h3>
+            <p>Erweitere das Programm, sodass der Benutzer beliebig viele neue Gerichte hinzufügen kann. Frage ihn dafür vorher wie viele Gerichte er hinzufügen will und lass den Input dann so oft laufen.</p>
+            <p>Beachte dabei, wenn eine Eingabe eine Zahl seien soll musst du um <code>input(), int()</code> machen. Dies sieht dann so aus <code>int(input("Anzahl:"))/code></p>
+        </section>
+
+    </div>
+</body>
+</html>

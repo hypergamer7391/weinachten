@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tag 13 - Dateien: Speichere und lies eine Liste</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Tag 13: Dateien – Speichere eine Liste in einer Datei und lies sie später wieder ein</h1>
+        </header>
+        
+        <section class="content">
+            <p>Heute lernst du, wie du Daten in einer Datei speicherst und wieder einliest. Das ist nützlich, um Informationen zu sichern.</p>
+
+            <h2>Programm: Daten speichern und einlesen</h2>
+            <pre>
+geschenke = []
+
+# Geschenkideen hinzufügen
+geschenke.append("Buch")
+geschenke.append("Schokolade")
+
+# Speichern in Datei
+with open("geschenke.txt", "w") as file:
+    for geschenk in geschenke:
+        file.write(geschenk + "\n")
+
+# Lesen aus Datei
+with open("geschenke.txt", "r") as file:
+    inhalt = file.readlines()
+
+print("Gespeicherte Geschenkideen:")
+for zeile in inhalt:
+    print(zeile.strip())
+            </pre>
+
+            <h3>Erklärung:</h3>
+            <ol>
+                <li><strong>Speichern:</strong> Die <code>open()</code>-Funktion wird mit dem Modus <code>"w"</code> genutzt, um die Datei zum Schreiben zu öffnen.</li>
+                <li><strong>Lesen:</strong> Mit dem Modus <code>"r"</code> kannst du die Datei einlesen und Zeilen ausgeben.</li>
+            </ol>
+
+            <h3>Challenge des Tages:</h3>
+            <p>Erweitere das Programm, um die Datei zu prüfen, bevor Daten hinzugefügt werden. Wenn die Datei existiert, lies die Inhalte zuerst aus und füge neue Ideen hinzu.</p>
+        </section>
+
+    </div>
+</body>
+</html>
+
+<!-- Der gleiche Aufbau wird für die Themen von Tag 14 bis 24 angepasst. -->

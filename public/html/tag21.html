@@ -1,0 +1,76 @@
+<!-- Tag 21 -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tag 21 - Passwort-Checker</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Tag 21: Passwort-Checker – Prüfe, ob ein Passwort sicher ist</h1>
+        </header>
+        
+        <section class="content">
+            <p>Heute erstellst du ein Programm, das überprüft, ob ein Passwort sicher genug ist.</p>
+
+            <h2>Aufgabe:</h2>
+            <ul>
+                <li>Lass den Benutzer ein Passwort eingeben.</li>
+                <li>Überprüfe, ob das Passwort mindestens 8 Zeichen lang ist.</li>
+                <li>Überprüfe, ob das Passwort mindestens einen Großbuchstaben, einen Kleinbuchstaben und eine Zahl enthält.</li>
+                <li>Gib dem Benutzer eine Rückmeldung, ob das Passwort sicher ist oder welche Kriterien fehlen.</li>
+            </ul>
+
+            <h3>Tipps:</h3>
+            <ul>
+                <li>Benutze <code>len()</code>, um die Länge des Passworts zu prüfen.</li>
+                <li>Mit <code>str.isupper()</code>, <code>str.islower()</code> und <code>str.isdigit()</code> kannst du prüfen, welche Zeichenarten enthalten sind.</li>
+                <li>Optional: Überlege, wie du Sonderzeichen prüfen könntest.</li>
+            </ul>
+
+            <h3>Challenge des Tages:</h3>
+            <ul>
+                <li>Erweitere das Programm, damit es mehrere Passwörter hintereinander prüft, bis der Benutzer <code>"exit"</code> eingibt.</li>
+                <li>Bonus: Zeige dem Benutzer alle Kriterien an, die fehlen, nicht nur das erste.</li>
+            </ul>
+        </section>
+        <!-- beispiel: while True:
+    pw = input("Gib ein Passwort ein (exit zum Stoppen): ")
+    if pw == "exit":
+        break
+    
+    fehler = []
+    sonderzeichen = ["!", ".", ",", "?"]
+
+    # Länge prüfen
+    if len(pw) < 8:
+        fehler.append("Passwort ist zu kurz (mindestens 8 Zeichen)")
+    
+    # Großbuchstaben prüfen
+    if not any(c.isupper() for c in pw):
+        fehler.append("Passwort hat keinen Großbuchstaben")
+    
+    # Kleinbuchstaben prüfen
+    if not any(c.islower() for c in pw):
+        fehler.append("Passwort hat keinen Kleinbuchstaben")
+    
+    # Zahlen prüfen
+    if not any(c.isdigit() for c in pw):
+        fehler.append("Passwort hat keine Zahl")
+    
+    # Sonderzeichen prüfen
+    if not any(c in sonderzeichen for c in pw):
+        fehler.append("Passwort hat kein Sonderzeichen (!, ., ,, ?)")
+    
+    # Ergebnis über input ausgeben
+    if fehler:
+        fehler_text = "Passwort ist unsicher:\n" + "\n".join(fehler)
+        input(fehler_text + "\nDrücke Enter, um weiterzumachen...")
+    else:
+        input("Passwort ist sicher! Drücke Enter, um weiterzumachen...") -->
+    </div>
+</body>
+</html>

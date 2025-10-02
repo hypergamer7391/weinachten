@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vite App</title>
+  </head>
+  <body>
+    <script>
+    // Make sure this is *before* you load the count.js script; otherwise
+    // the pageview may get sent before this is loaded and this will just
+    // overwrite the object.
+    window.goatcounter = {allow_local: true}
+</script>
+    <div id="app"></div>
+    <script type="module" src="/src/main.js"></script>
+    <script data-goatcounter="https://juliusweiling.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+  </body>
+</html>

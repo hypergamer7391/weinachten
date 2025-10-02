@@ -1,0 +1,41 @@
+<!-- Tag 23 -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tag 23 - Generator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Tag 23: Generator – Zahlen erzeugen</h1>
+        </header>
+        
+        <section class="content">
+            <p>Heute lernst du, wie du mit einem Generator Werte erzeugst, ohne eine komplette Liste im Speicher zu erstellen.</p>
+
+            <h2>Programm: Generator für Zahlen</h2>
+            <pre>
+def zahlengenerator():
+    for zahl in range(1, 6):
+        yield zahl
+
+for nummer in zahlengenerator():
+    print(nummer)
+            </pre>
+
+            <h3>Erklärung:</h3>
+            <ol>
+                <li><strong>Generator:</strong> Mit <code>yield</code> kannst du Werte nacheinander erzeugen.</li>
+                <li><strong>Effizienz:</strong> Generatoren verbrauchen weniger Speicher, da sie nicht alle Werte auf einmal erstellen.</li>
+            </ol>
+
+            <h3>Challenge des Tages:</h3>
+            <p>Erstelle einen Generator, der unendlich viele Zahlen ab 1 erzeugt, und stoppe ihn, wenn eine Zahl größer als 10 ist.</p>
+        </section>
+
+    </div>
+</body>
+</html>
