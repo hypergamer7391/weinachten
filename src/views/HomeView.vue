@@ -31,7 +31,7 @@
   </main>
 </template>
 
-<style>body {
+<style scoped>body {
   margin: 0;
   background-color: #0f0f0f;
   color: #00ff00;

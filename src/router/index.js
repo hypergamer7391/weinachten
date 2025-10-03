@@ -24,6 +24,32 @@ const router = createRouter({
       name: 'impressum',
       component: () => import('../views/Impressum.vue'),
     },
+    {
+      path: '/school-info',
+      name: 'school-info',
+      component: () => import('../views/SchoolInfo.vue'),
+    },
+    {
+      path: '/register-teacher',
+      name: 'register-teacher',
+      component: () => import('../views/RegisterTeacher.vue'),
+    },
+    {
+      path: '/login-teacher',
+      name: 'login-teacher',
+      component: () => import('../views/LoginTeacher.vue'),
+    },
+    {
+      path: '/teacher-dashboard',
+      name: 'teacher-dashboard',
+      component: () => import('../views/teacherDashboard.vue'),
+    },
+    {
+      path: '/teacher-create-class',
+      name: 'teacher-create-class',
+      component: () => import('../views/createClass.vue'),
+    }
+    
   ],
 })
 

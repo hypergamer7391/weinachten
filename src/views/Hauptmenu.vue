@@ -1,27 +1,28 @@
 <template>
     <div class="site">
   <div class="überschrift">
+    <p class="username">Angemeldet als {{ user.role }}: {{ user.name }}</p>
     <h1>Python im Advent</h1>
+
   </div>
 
   <div class="numbers">
     <button
-  v-for="number in inputs"
-  :key="number"
-  @click="redirect_page(number)"
-  class="number"
-  :class="{ 'disabled-button': number > day }"
-  :disabled="number > day"
->
-  {{ number }}
-</button>
-
+      v-for="number in inputs"
+      :key="number"
+      @click="redirect_page(number)"
+      class="number"
+      :class="{ 'disabled-button': number > day }"
+      :disabled="number > day"
+    >
+      {{ number }}
+    </button>
   </div>
-    <div class="footer" style="position: fixed; bottom: 2%; left:50%; width: 100%;"><a href="/impressum">Impressum</a></div>
-
+  <div class="footer">
+    <a href="/impressum">Impressum</a>
   </div>
+</div>
 </template>
-
 
 <style scoped>
 .site {
@@ -34,6 +35,15 @@
   height: 100vh;
   margin: 0;
   user-select: none;
+  position: relative;
+}
+
+.username {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  text-align: center;
+  text-shadow: 0 0 6px #00ff00;
 }
 
 .überschrift {
@@ -95,21 +105,56 @@ a {
 a:hover {
   color: #a0ffa0;
 }
+
+.footer {
+  position: fixed;
+  bottom: 2%;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 </style>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 const router = useRouter()
 import { inject } from 'vue'
+import {auth, db} from '../firebase'
+import { onAuthStateChanged } from 'firebase/auth'
+import { doc, getDoc } from 'firebase/firestore'
 
+const user = ref('')
 const globalState = inject('globalState')
+const isLoggedIn = ref(false)
+const loading = ref(true)
 
 // Zugriff auf debugMode
 console.log(globalState.debugMode)
 
 // Ändern möglich
-
+onMounted(() => {
+  onAuthStateChanged(auth, async (firebaseUser) => {
+    if (firebaseUser) {
+      const snap = await getDoc(doc(db, 'users', firebaseUser.uid))
+      if (snap.exists()) {
+        user.value = {
+          name: snap.data().name || firebaseUser.email.split('@')[0],
+          role: snap.data().role || 'Unbekannt',
+          isAdmin: snap.data().isAdmin || false
+        }
+        isLoggedIn.value = true
+      } else {
+        isLoggedIn.value = false
+      }
+    } else {
+      isLoggedIn.value = false
+    }
+    loading.value = false
+  })
+})
 
 const debug = globalState.debugMode
 const date = new Date()
