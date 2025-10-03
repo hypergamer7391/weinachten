@@ -31,6 +31,9 @@
 
 <script setup>
 import { ref } from 'vue'
+import { getAuth } from 'firebase/auth'
+import { db } from '../firebase'
+import { collection, addDoc } from 'firebase/firestore'
 
 const className = ref('')
 const studentCount = ref(1)
