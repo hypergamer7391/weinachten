@@ -32,54 +32,13 @@
 <script setup>
 import { ref } from 'vue'
 import { db, auth } from '../firebase'
-import { doc, updateDoc, getDoc, setDoc, query, where, getDocs } from 'firebase/firestore'
-import router from '@/router'
+import { doc, updateDoc, getDoc } from 'firebase/firestore'
 
 const className = ref('')
 const studentCount = ref(1)
 const loading = ref(false)
 const error = ref('')
 const usernames = ref([])
-const userCredential = ref(null)
-
-// Hilfsfunktion für zufälligen Code
-function generateClassCode(length = 9) {
-  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
-  let code = ''
-  for (let i = 0; i < length; i++) {
-    code += chars.charAt(Math.floor(Math.random() * chars.length))
-  }
-  return code
-}
-
-// Prüft, ob der Code schon existiert
-async function getUniqueClassCode() {
-  let code
-  let exists = true
-  while (exists) {
-    code = generateClassCode()
-    // Alle Klassen im User-Dokument durchsuchen
-    const userRef = doc(db, "users", auth.currentUser.uid)
-    const userSnap = await getDoc(userRef)
-    exists = false
-    if (userSnap.exists() && Array.isArray(userSnap.data().classen)) {
-      exists = userSnap.data().classen.some(klasse => klasse.code === code)
-    }
-  }
-  return code
-}
-
-// Hilfsfunktion für Schüler-ID
-function generateStudentId(classId, idx) {
-  return `${classId}_${idx}_${Date.now()}`
-}
-
-// Hilfsfunktion für Klassen-ID
-function generateClassId() {
-  return 'class_' + Math.random().toString(36).substr(2, 12) + '_' + Date.now()
-}
-
-import { createUserWithEmailAndPassword, signInWithCredential, signInWithEmailAndPassword } from 'firebase/auth'
 
 async function createClass() {
   error.value = ''
@@ -91,58 +50,26 @@ async function createClass() {
     loading.value = false
     return
   }
-  const teacherEmail = auth.currentUser.email
-const teacherPassword = prompt('Bitte Lehrer-Passwort eingeben, um Schüler-Accounts zu erstellen')
-console.log(teacherEmail, teacherPassword)
 
-
-  const classId = generateClassId()
-  const classCode = await getUniqueClassCode()
-
+  // Schüler-Usernamen generieren
   const students = []
-
-  try {
   for (let i = 1; i <= studentCount.value; i++) {
     const username = `${className.value.replace(/\s+/g, '').toLowerCase()}${i}`
-    const email = `${username}@${classCode.toLowerCase()}.de`
-    const password = '123456'
-
-    // Schüler-Account erstellen
-    userCredential.value = await createUserWithEmailAndPassword(auth, email, password)
-    await setDoc(doc(db, "users", userCredential.value.user.uid), {
-      username: email,
-      role: "student",
-      
-      createdAt: new Date()
-    });
-
-    // Lehrer wieder einloggen und awaiten
-    await signInWithEmailAndPassword(auth, teacherEmail, teacherPassword)
-
     students.push({
       username,
-      email,
-      id: generateStudentId(classId, i),
       permissions: ['student']
     })
     usernames.value.push(username)
   }
-} catch (err) {
-  console.error('Fehler beim Erstellen der Accounts oder Wiederanmeldung:', err.message)
-  error.value = 'Fehler: ' + err.message
-  loading.value = false
-  return
-}
 
-
+  // Klasse-Objekt
   const newClass = {
-    id: classId,
-    code: classCode,
     name: className.value,
     createdAt: new Date(),
     students: students
   }
 
+  // Lehrer-Dokument updaten: Array "classen" erweitern
   try {
     const userRef = doc(db, "users", auth.currentUser.uid)
     const userSnap = await getDoc(userRef)
@@ -156,12 +83,8 @@ console.log(teacherEmail, teacherPassword)
     error.value = 'Fehler beim Speichern: ' + e.message
   }
 
-
-
   loading.value = false
-  router.push('/teacher-dashboard')
 }
-
 </script>
 
 <style scoped>

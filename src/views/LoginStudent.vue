@@ -1,15 +1,15 @@
 <template>
   <div class="app-wrapper">
     <div class="überschrift">
-      <h1>Lehrer-Login</h1>
+      <h1>Schüler-Login</h1>
     </div>
     <div class="content">
-      <form @submit.prevent="loginTeacher" class="login-form">
-        <label for="email">E-Mail-Adresse</label>
-        <input type="email" id="email" v-model="email" required />
+      <form @submit.prevent="loginStudent" class="login-form">
+        <label for="classCode">Klassen-Code</label>
+        <input type="text" id="classCode" v-model="classCode" required />
 
-        <label for="password">Passwort</label>
-        <input type="password" id="password" v-model="password" required />
+        <label for="username">Benutzername</label>
+        <input type="text" id="username" v-model="username" required />
 
         <button class="login-btn" type="submit" :disabled="loading">
           {{ loading ? 'Logge ein...' : 'Login' }}
@@ -26,29 +26,76 @@
 <script setup>
 import { ref } from 'vue'
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
-import { auth } from '../firebase'
+import { auth, db } from '../firebase'
 import { useRouter } from 'vue-router'
+import { doc, getDoc, collection, query, where, getDocs } from 'firebase/firestore'
 
-const router = useRouter()
-
-const email = ref('')
-const password = ref('')
+// Hier müsste die Logik für die Prüfung des Klassen-Codes und Benutzernamens ergänzt werden
+const classCode = ref('')
+const username = ref('')
 const error = ref('')
 const loading = ref(false)
+const router = useRouter()
 
-async function loginTeacher() {
+async function loginStudent() {
   error.value = ''
   loading.value = true
-  try {
-    
-    await signInWithEmailAndPassword(auth, email.value, password.value)
-    
-    router.push('/')
-  } catch (e) {
-    error.value = 'Login fehlgeschlagen: ' + e.message
-  }
+
+  await login(username.value, classCode.value).then(result => {
+    if (result.success) {
+      console.log("Erfolgreich eingeloggt als:", result)
+      if (result.role === "teacher") {
+        router.push('/teacher-dashboard')
+      } else if (result.role === "student") {
+        signInWithEmailAndPassword(auth, `${username.value}@${classCode.value}.de`, "123456").then(() => {
+          router.push('/')
+        }).catch(err => {
+          console.error('Fehler beim Einloggen als Lehrer:', err.message)
+          error.value = 'Fehler beim Einloggen als Lehrer: ' + err.message
+        })
+        
+      }
+    } else {
+      error.value = result.message || "Login fehlgeschlagen"
+    }
+  }).catch(err => {
+    error.value = "Ein Fehler ist aufgetreten: " + err.message
+  })
+
+  // Hier: Logik für Authentifizierung mit Klassen-Code und Username
+  // Beispiel: Suche Klasse mit Code, prüfe ob Username existiert
+  // Bei Erfolg: Weiterleitung, z.B. router.push('/student-dashboard')
+  // Bei Fehler: error.value setzen
+
   loading.value = false
 }
+
+async function login(usernameInput, classCodeInput) {
+  const usersRef = collection(db, "users");
+  const usersSnapshot = await getDocs(usersRef);
+
+  for (const userDoc of usersSnapshot.docs) {
+    const teacherData = userDoc.data();
+    const classes = teacherData.classen || [];
+
+    for (const cls of classes) {
+      if (cls.code === classCodeInput) {
+        const student = cls.students.find(s => s.username === usernameInput);
+        if (student) {
+          return {
+            success: true,
+            role: "student",
+            classId: cls.id,
+            teacherId: userDoc.id,
+          };
+        }
+      }
+    }
+  }
+
+  return { success: false, message: "Kein Schüler oder Klasse gefunden!" };
+}
+
 </script>
 
 <style scoped>

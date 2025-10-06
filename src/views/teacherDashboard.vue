@@ -2,15 +2,16 @@
   <div class="app-wrapper">
     <div class="überschrift">
       <h1>Lehrer-Dashboard</h1>
+  
     </div>
-    <div class="content">
+    <div class="content" v-if="!loading">
       <p>
         Willkommen im Lehrer-Dashboard! Wählen Sie oben eine Klasse aus, um sie zu verwalten.
       </p>
-      <div v-if="klassen.length != 0" class="class-select">
+      <div v-if="classes.length != 0" class="class-select">
         <label for="classSelect">Klasse auswählen:</label>
         <select id="classSelect" v-model="selectedClass">
-          <option v-for="klasse in klassen" :key="klasse.id" :value="klasse.id">
+          <option v-for="klasse in classes" :key="klasse.id" :value="klasse.id">
             {{ klasse.name }}
           </option>
         </select>
@@ -23,7 +24,7 @@
       </div>
       <div  class="manage-section">
         <h2>Verwaltung aller Klassen</h2>
-        <button class="dashboard-btn">Neue Klasse erstellen</button>
+        <button class="dashboard-btn" @click="router.push('/teacher-create-class')">Neue Klasse erstellen</button>
        
       </div>
       <div class="info-box">
@@ -38,16 +39,41 @@
 
 <script setup>
 import { ref } from 'vue'
-
+import { useRouter } from 'vue-router'
+import { db, auth } from '../firebase'
+import { doc, getDoc } from 'firebase/firestore'
+import { onAuthStateChanged } from 'firebase/auth'
+const router = useRouter()
 // Beispiel-Daten für Klassen
-const klassen = ref([])
+const classes = ref([])
+const loading = ref(true)
 
+onAuthStateChanged(auth, async (user) => {
+  if (user) {
+    const teacherId = user.uid; // UID statt Email
+    const teacherDocRef = doc(db, "users", teacherId);
+    const teacherDocSnap = await getDoc(teacherDocRef);
 
+    console.log("Eingeloggter Lehrer UID:", teacherId, teacherDocRef, teacherDocSnap);
 
-const selectedClass = ref(klassen.value.length ? klassen.value[0].id : '')
+    if (teacherDocSnap.exists()) {
+      const teacherData = teacherDocSnap.data();
+      console.log("Lehrer-Daten:", teacherData);
+      classes.value = teacherData.classen || [];
+      console.log("Alle Klassen des eingeloggten Lehrers:", classes);
+    } else {
+      console.log("Lehrer-Dokument nicht gefunden!");
+    }
+  } else {
+    console.log("Kein Lehrer eingeloggt.");
+  }
+    loading.value = false
+});
+
+const selectedClass = ref(classes.value.length ? classes.value[0].id : '')
 
 function getClassName(id) {
-  const klasse = klassen.value.find(k => k.id === id)
+  const klasse = classes.value.find(k => k.id === id)
   return klasse ? klasse.name : ''
 }
 </script>
