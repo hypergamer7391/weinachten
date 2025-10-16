@@ -8,7 +8,7 @@ const app = createApp(App)
 
 // Erstelle ein reaktives globales Objekt
 const globalState = reactive({
-  debugMode: true
+  debugMode: false,
 })
 
 app.use(router)

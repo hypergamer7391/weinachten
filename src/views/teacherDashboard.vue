@@ -18,7 +18,7 @@
       </div>
       <div v-if="selectedClass" class="manage-section">
         <h2>Verwaltung für: {{ getClassName(selectedClass) }}</h2>
-        <button class="dashboard-btn">Schüler-Fortschritt ansehen</button>
+        <button class="dashboard-btn" @click="weiterleitungFortschritt()">Schüler-Fortschritt ansehen</button>
         <button class="dashboard-btn">Klasse bearbeiten</button>
         <button class="dashboard-btn">Schüler bearbeiten</button>
       </div>
@@ -69,6 +69,13 @@ onAuthStateChanged(auth, async (user) => {
   }
     loading.value = false
 });
+
+function weiterleitungFortschritt() {
+    console
+  if (selectedClass.value) {
+    router.push(`/teacher-student-view/${selectedClass.value}`);
+  }
+}
 
 const selectedClass = ref(classes.value.length ? classes.value[0].id : '')
 
