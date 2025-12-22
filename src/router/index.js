@@ -5,67 +5,56 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/python/:id',
-      name: 'python',
-      component: HomeView,
-    },
-    {
-      path: '/home',
-      name: 'home',
-      component: () => import('../views/Hauptmenu.vue'),
-    },
-    {
       path: '/',
       name: 'home',
-      component: () => import('../views/Hauptmenu.vue'),
+      component: HomeView,
     },
-    {
-      path: '/impressum',
-      name: 'impressum',
-      component: () => import('../views/Impressum.vue'),
-    },
-    {
-      path: '/school-info',
-      name: 'school-info',
-      component: () => import('../views/SchoolInfo.vue'),
-    },
-    {
-      path: '/register-teacher',
-      name: 'register-teacher',
-      component: () => import('../views/RegisterTeacher.vue'),
-    },
-    {
-      path: '/login-teacher',
-      name: 'login-teacher',
-      component: () => import('../views/LoginTeacher.vue'),
-    },
-    {
-      path: '/teacher-dashboard',
-      name: 'teacher-dashboard',
-      component: () => import('../views/teacherDashboard.vue'),
-    },
-    {
-      path: '/teacher-student-view/:classCode',
-      name: 'teacher-^student-view',
-      component: () => import('../views/teacherStudentView.vue'),
-    },
-    {
-      path: '/teacher-create-class',
-      name: 'teacher-create-class',
-      component: () => import('../views/createClass.vue'),
-    },
-     {
-      path: '/teacher-manage-class',
-      name: 'teacher-manage-class',
-      component: () => import('../views/manageClass.vue'),
-    },
-    {
-      path: '/login-student',
-      name: 'login-student',
-      component: () => import('../views/LoginStudent.vue'),
-    },
-    
-  ],
+  {
+    path: '/raetsel1',
+    name: 'raetsel1',
+    component: () => import('../views/raum1.vue')
+  },
+  {
+    path: '/raetsel2',
+    name: 'raetsel2',
+    component: () => import('../views/raum2.vue')
+  },
+  {
+    path: '/raetsel3',
+    name: 'raetsel3',
+    component: () => import('../views/raum3.vue')
+  },
+  {
+    path: '/raetsel4',
+    name: 'raetsel4',
+    component: () => import('../views/raum4.vue')
+  },
+  {
+    path: '/raetsel5',
+    name: 'raetsel5',
+    component: () => import('../views/raum5.vue')
+  },
+  {
+    path: '/ende',
+    name: 'ende',
+    component: () => import('../views/ende.vue')
+  }
+],
+})
+
+// 🔹 Globaler Guard: automatische Weiterleitung basierend auf localStorage
+router.beforeEach((to, from, next) => {
+  const savedRoom = localStorage.getItem('raum')
+
+  // Wenn ein Raum gespeichert ist und wir gerade auf Start sind
+  console.log('Navigiere zu:', to.path, 'Gespeicherter Raum:', savedRoom)
+  if (savedRoom && to.path !== '/raetsel' + savedRoom) {
+    return next('/raetsel' + savedRoom) // direkt dorthin
+  }
+
+  next()
 })
 
 export default router
+
+
