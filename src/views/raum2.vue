@@ -41,7 +41,7 @@ const richtigeDistanz = 156 // z.B. 123 km
 function checkDistance() {
   if (Number(distanceInput.value) === richtigeDistanz) {
     router.push('/raetsel3') // neue Route
-    localStorage.setItem('raum', 2)
+    localStorage.setItem('raum', 3)
   } else {
     feedback.value = '❌ Das fühlt sich noch nicht richtig an.'
   }
