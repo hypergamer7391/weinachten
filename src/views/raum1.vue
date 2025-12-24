@@ -110,6 +110,14 @@ function openKiste() {
 }
 </script>
 
+<style>
+  body {
+    background-color: #f0f0f0;
+    overflow: hidden;
+  }
+
+</style>
+
 <style scoped>
 .container {
   max-width: 600px;
