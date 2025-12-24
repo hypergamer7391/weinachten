@@ -59,7 +59,7 @@ const candles = ref([
 ])
 const draggedIndex = ref(null)
 const feedback = ref('')
-const solved = ref(false)
+const solved = ref(true)
 const code = ref('')
 // Drag & Drop Methoden
 function dragStart(index) {
